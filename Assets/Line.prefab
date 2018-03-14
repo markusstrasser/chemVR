@@ -1,0 +1,228 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1001 &100100000
+Prefab:
+  m_ObjectHideFlags: 1
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications: []
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 0}
+  m_RootGameObject: {fileID: 1149371349986290}
+  m_IsPrefabParent: 1
+--- !u!1 &1149371349986290
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 4704202439288874}
+  - component: {fileID: 120685450794484890}
+  m_Layer: 0
+  m_Name: Line
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4704202439288874
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1149371349986290}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!120 &120685450794484890
+LineRenderer:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1149371349986290}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
+  m_MotionVectors: 0
+  m_LightProbeUsage: 0
+  m_ReflectionProbeUsage: 0
+  m_Materials:
+  - {fileID: 0}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 0
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_Positions:
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0.4651, z: 0.52}
+  - {x: 0, y: 0.4202, z: 0.52}
+  - {x: 0, y: 0.3753, z: 0.52}
+  - {x: 0, y: 0.3304, z: 0.52}
+  - {x: 0, y: 0.2855, z: 0.52}
+  - {x: 0, y: 0.24060002, z: 0.52}
+  - {x: 0, y: 0.19570002, z: 0.52}
+  - {x: 0, y: 0.15080002, z: 0.52}
+  - {x: 0, y: 0.10590002, z: 0.52}
+  - {x: 0, y: 0.06100002, z: 0.52}
+  - {x: 0, y: 0.01610002, z: 0.52}
+  - {x: 0, y: -0.028799951, z: 0.52}
+  - {x: 0, y: -0.07369995, z: 0.52}
+  - {x: 0, y: -0.11859995, z: 0.52}
+  - {x: 0, y: -0.16349995, z: 0.52}
+  - {x: 0, y: -0.20839995, z: 0.52}
+  - {x: 0, y: -0.25329995, z: 0.52}
+  - {x: 0, y: -0.29819995, z: 0.52}
+  - {x: 0, y: -0.34309995, z: 0.52}
+  - {x: 0, y: -0.38799995, z: 0.52}
+  - {x: 0, y: -0.43289995, z: 0.52}
+  - {x: 0, y: -0.47779995, z: 0.52}
+  - {x: 0, y: -0.52269995, z: 0.52}
+  - {x: 0, y: -0.5675999, z: 0.52}
+  - {x: 0, y: -0.61249995, z: 0.52}
+  - {x: 0, y: -0.6573999, z: 0.52}
+  - {x: 0, y: -0.70229995, z: 0.52}
+  - {x: 0, y: -0.7471999, z: 0.52}
+  - {x: 0, y: -0.79209995, z: 0.52}
+  - {x: 0, y: -0.8369999, z: 0.52}
+  - {x: 0, y: -0.88189995, z: 0.52}
+  - {x: 0, y: -0.9267999, z: 0.52}
+  - {x: 0, y: -0.97169983, z: 0.52}
+  - {x: 0, y: -1.0165999, z: 0.52}
+  - {x: 0, y: -1.0614998, z: 0.52}
+  - {x: 0, y: -1.1063999, z: 0.52}
+  - {x: 0, y: -1.1512998, z: 0.52}
+  - {x: 0, y: -1.1961999, z: 0.52}
+  - {x: 0, y: -1.2410998, z: 0.52}
+  - {x: 0, y: -1.2859999, z: 0.52}
+  - {x: 0, y: -1.3308998, z: 0.52}
+  - {x: 0, y: -1.3757999, z: 0.52}
+  - {x: 0, y: -1.4206998, z: 0.52}
+  - {x: 0, y: -1.4655999, z: 0.52}
+  - {x: 0, y: -1.5105, z: 0.52}
+  - {x: 0, y: -1.5553999, z: 0.52}
+  - {x: 0, y: -1.6002998, z: 0.52}
+  - {x: 0, y: -1.6451998, z: 0.52}
+  - {x: 0, y: -1.6900997, z: 0.52}
+  - {x: 0, y: -1.7349999, z: 0.52}
+  - {x: 0, y: -1.7798998, z: 0.52}
+  - {x: 0, y: -1.8247998, z: 0.52}
+  - {x: 0, y: -1.8696997, z: 0.52}
+  - {x: 0, y: -1.9145999, z: 0.52}
+  - {x: 0, y: -1.9594998, z: 0.52}
+  - {x: 0, y: -2.0043998, z: 0.52}
+  - {x: 0, y: -2.0492997, z: 0.52}
+  - {x: 0, y: -2.0942, z: 0.52}
+  - {x: 0, y: -2.1390998, z: 0.52}
+  - {x: 0, y: -2.1839998, z: 0.52}
+  - {x: 0, y: -8.2289, z: 0.52}
+  - {x: 0, y: -2.2738, z: 0.52}
+  - {x: 0, y: -2.3186998, z: 0.52}
+  - {x: 0, y: -2.3635998, z: 0.52}
+  - {x: 0, y: -2.4084997, z: 0.52}
+  - {x: 0, y: -2.4533997, z: 0.52}
+  - {x: 0, y: -2.4982998, z: 0.52}
+  - {x: 0, y: -2.5431998, z: 0.52}
+  - {x: 0, y: -2.5880997, z: 0.52}
+  - {x: 0, y: -2.6329997, z: 0.52}
+  - {x: 0, y: -2.6778998, z: 0.52}
+  - {x: 0, y: -2.7227998, z: 0.52}
+  - {x: 0, y: -2.7676997, z: 0.52}
+  - {x: 0, y: -2.8125997, z: 0.52}
+  - {x: 0, y: -2.8574998, z: 0.52}
+  - {x: 0, y: -2.9023998, z: 0.52}
+  - {x: 0, y: -2.9472997, z: 0.52}
+  - {x: 0, y: -2.9921997, z: 0.52}
+  - {x: 0, y: -3.0370998, z: 0.52}
+  - {x: 0, y: -3.0819998, z: 0.52}
+  - {x: 0, y: -3.1268997, z: 0.52}
+  - {x: 0, y: -3.1717997, z: 0.52}
+  - {x: 0, y: -3.2166996, z: 0.52}
+  - {x: 0, y: -3.2615998, z: 0.52}
+  - {x: 0, y: -3.3064997, z: 0.52}
+  - {x: 0, y: -3.3513997, z: 0.52}
+  - {x: 0, y: -3.3962996, z: 0.52}
+  - {x: 0, y: -3.4411998, z: 0.52}
+  - {x: 0, y: -3.4860997, z: 0.52}
+  - {x: 0, y: -3.531, z: 0.52}
+  - {x: 0, y: -3.5758998, z: 0.52}
+  - {x: 0, y: -3.6207998, z: 0.52}
+  - {x: 0, y: -3.6656997, z: 0.52}
+  - {x: 0, y: -3.7105997, z: 0.52}
+  - {x: 0, y: -3.7554996, z: 0.52}
+  - {x: 0, y: -3.8003995, z: 0.52}
+  - {x: 0, y: -3.8452995, z: 0.52}
+  - {x: 0, y: -3.8901994, z: 0.52}
+  - {x: 0, y: -3.9350998, z: 0.52}
+  m_Parameters:
+    serializedVersion: 2
+    widthMultiplier: 1
+    widthCurve:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 2
+        time: 0
+        value: 0.04386902
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 0
+    colorGradient:
+      serializedVersion: 2
+      key0: {r: 0.875, g: 0.59191173, b: 0.59191173, a: 1}
+      key1: {r: 1, g: 1, b: 1, a: 1}
+      key2: {r: 0.8780048, g: 0.6017215, b: 0.6017215, a: 0}
+      key3: {r: 0, g: 0, b: 0, a: 0}
+      key4: {r: 0, g: 0, b: 0, a: 0}
+      key5: {r: 0, g: 0, b: 0, a: 0}
+      key6: {r: 0, g: 0, b: 0, a: 0}
+      key7: {r: 0, g: 0, b: 0, a: 0}
+      ctime0: 0
+      ctime1: 35273
+      ctime2: 65535
+      ctime3: 0
+      ctime4: 0
+      ctime5: 0
+      ctime6: 0
+      ctime7: 0
+      atime0: 32960
+      atime1: 65535
+      atime2: 0
+      atime3: 0
+      atime4: 0
+      atime5: 0
+      atime6: 0
+      atime7: 0
+      m_Mode: 0
+      m_NumColorKeys: 3
+      m_NumAlphaKeys: 2
+    numCornerVertices: 0
+    numCapVertices: 0
+    alignment: 0
+    textureMode: 0
+    generateLightingData: 0
+  m_UseWorldSpace: 1
+  m_Loop: 0

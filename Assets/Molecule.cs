@@ -2,21 +2,28 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Molecule : MonoBehaviour {
 
+public class Molecule : MonoBehaviour {
+    public GameObject atom;
 	// Use this for initialization
 	void Start () {
-		
+        Init(new List<int>() { 1 });
 	}
 
-    void Init(List <Atom> atoms)
+    void Init(List<int> atomnNumbers)
     {
+        foreach (int num in atomnNumbers)
+        {
+            GameObject at = Instantiate<GameObject>(atom);
+            at.transform.parent = transform;
+            at.transform.localPosition = Vector3.zero;
 
+            at.GetComponent<Atom>().Init(num);
+            
+        }
     }
-    void AddAtom(Atom atom)
-    {
+   
 
-    }
     string Naming(List <Atom> components)  
     {
         return ".reduce";

@@ -19,7 +19,7 @@ public class SwagUtils : MonoBehaviour {
             Vector3 deltaVec = b.position - a.position;
             Vector3 step = deltaVec / segments;
 
-            for (int i = 1; i < segments; i++)
+            for (int i = 0; i <= segments; i++)
             {
                 line.SetPosition(i, a.position + (step * i));
             }

@@ -6,7 +6,8 @@ using Swag;
 using VRTK;
 
 [System.Serializable] //show Lists in inspector
-public class Atom : MonoBehaviour {
+public class Atom : MonoBehaviour
+{
     public Config state;
     public Electron electron;
     public List<Transform> to = new List<Transform>();
@@ -30,14 +31,28 @@ public class Atom : MonoBehaviour {
     {
         grabbed = false;
         Transform other = closestToMe();
-        if (other != null)
+        if (isLegitBond(other))
         {
-            Bond(other);
+            mergeElements(other);
+            to.Add(other);
+            Debug.Log(transform.name + "  bonded with  " + other.name);
+            swagger.CreateLine(transform, other);
+        }
+
+        if (other == null)
+        {
+            Debug.Log("NOTHING TO BOND ----> >>> ");
         }
     }
 
+    bool isLegitBond(Transform B)
+    {
+        return B != null && !isSame(transform, B) && CanConnect(B.GetComponent<Atom>());
+    }
+
     // Use this for initialization
-    void Start() {
+    void Start()
+    {
         //get data from chemical table
         Init(1);
         swagger = GameObject.Find("Swag").GetComponent<SwagUtils>();
@@ -61,7 +76,7 @@ public class Atom : MonoBehaviour {
 
     }
 
-    void Init(int atomNumber)
+    public void Init(int atomNumber)
     {
         state = AtomConfig.PTable.config[atomNumber];
     }
@@ -72,16 +87,16 @@ public class Atom : MonoBehaviour {
         {
             to.Add(other);
             Debug.Log(transform.name + "  bonded with  " + other.name);
-                
+
             swagger.CreateLine(transform, other);
-            addToMolecule(other.GetComponent<Atom>());
+            mergeElements(other);
         }
         else
         {
             //no bonding
             Debug.LogError("Tried to bond two Atoms wrongly");
         }
-       
+
     }
 
     bool isSame(Transform t1, Transform t2)
@@ -91,11 +106,28 @@ public class Atom : MonoBehaviour {
 
     bool isBonded()
     {
-        return transform.parent != null;
+        return transform.parent.childCount <= 1;
     }
 
-    void addToMolecule(Atom B)
+    void mergeElements(Transform B)
     {
+        if (!isSame(transform, B) && CanConnect(B.GetComponent<Atom>()))
+        {
+            foreach (Transform child in B.parent)
+            {
+                child.parent = transform.parent;
+            }
+        }
+            //give me all B's children
+       
+        //destroy B. Now we're one!
+        Destroy(B.gameObject);
+    }
+
+    void Bond(Atom B)
+    {
+        //give all children
+        //delete B
         if (!isBonded() && !B.isBonded())
         {
             myParent = new GameObject("Molec");
@@ -120,9 +152,10 @@ public class Atom : MonoBehaviour {
     {
         return (state.valence == state.capacity) || state.valence == 0;
     }
-    bool CanConnect (Atom B)
+    bool CanConnect(Atom B)
     {
-        return !B.isFull() && !isFull(); 
+        if (B == null) { return false; };
+        return !B.isFull() && !isFull();
     }
 
     Transform closest()
@@ -134,9 +167,10 @@ public class Atom : MonoBehaviour {
     {
         Transform closest = null;
         float closestDist = maxDistance;
-        foreach (Transform child in transform.parent) {
+        foreach (Transform child in transform.parent)
+        {
             //loop through siblings
-    
+
             float dist = Vector3.Distance(transform.position, child.position);
 
             if (dist < maxDistance && dist < closestDist && !isSame(transform, child))
@@ -150,18 +184,8 @@ public class Atom : MonoBehaviour {
 
     }
 
-	// Update is called once per frame
-	void Update () {
-        if (Input.GetKeyDown("space"))
-        {
-            Debug.Log("Space pressed");
-            Bond(GameObject.Find("Atom (1)").transform);
-            
-        }
-
-        if (grabbed)
-        {
-        }
-		
-	}
+    // Update is called once per frame
+    void Update()
+    {
+    }
 }

@@ -162,6 +162,12 @@ Prefab:
       propertyPath: m_RootOrder
       value: 7
       objectReference: {fileID: 0}
+    - target: {fileID: 114883610253686830, guid: e4cc8c7f87a30ed4f880756bfe28063e,
+        type: 2}
+      propertyPath: lRender
+      value: 
+      objectReference: {fileID: 120790883336094412, guid: 259af9caf3444c244a7872a8cb8a3c09,
+        type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: e4cc8c7f87a30ed4f880756bfe28063e, type: 2}
   m_IsPrefabParent: 0
@@ -660,7 +666,7 @@ Prefab:
     - target: {fileID: 224348929294147774, guid: b1581aacaba35664e80e3d0d9f2ea994,
         type: 2}
       propertyPath: m_AnchoredPosition.x
-      value: 1045
+      value: 805
       objectReference: {fileID: 0}
     - target: {fileID: 224348929294147774, guid: b1581aacaba35664e80e3d0d9f2ea994,
         type: 2}

@@ -21,8 +21,22 @@ public class Molecule : MonoBehaviour {
             at.GetComponent<Atom>().Init(num);
             
         }
+
+        Debug.Log(size());
     }
-   
+    
+    public int size () //in JS that's 1 line...
+    {
+        int counter = 0;
+        foreach(Transform child in transform)
+        {
+            if (child.GetComponent<Atom>())
+            {
+                counter++;
+            }
+        }
+        return counter;
+    }
 
     string Naming(List <Atom> components)  
     {

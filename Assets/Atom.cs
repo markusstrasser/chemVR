@@ -65,6 +65,8 @@ public class Atom : MonoBehaviour
         }
 
 
+       
+        
         if (GetComponent<VRTK_InteractableObject>() == null)
         {
             Debug.LogError("Team3_Interactable_Object_Extension is required to be attached to an Object that has the VRTK_InteractableObject script attached to it");
@@ -79,24 +81,6 @@ public class Atom : MonoBehaviour
     public void Init(int atomNumber)
     {
         state = AtomConfig.PTable.config[atomNumber];
-    }
-
-    public void Bond(Transform other)
-    {
-        if (!isSame(transform, other) && CanConnect(other.GetComponent<Atom>()))
-        {
-            to.Add(other);
-            Debug.Log(transform.name + "  bonded with  " + other.name);
-
-            swagger.CreateLine(transform, other);
-            mergeElements(other);
-        }
-        else
-        {
-            //no bonding
-            Debug.LogError("Tried to bond two Atoms wrongly");
-        }
-
     }
 
     bool isSame(Transform t1, Transform t2)
@@ -121,32 +105,8 @@ public class Atom : MonoBehaviour
             //give me all B's children
        
         //destroy B. Now we're one!
-        Destroy(B.gameObject);
+        Destroy(B.parent);
     }
-
-    void Bond(Atom B)
-    {
-        //give all children
-        //delete B
-        if (!isBonded() && !B.isBonded())
-        {
-            myParent = new GameObject("Molec");
-            myParent.AddComponent<Molecule>();
-            transform.parent = myParent.transform;
-            B.transform.parent = myParent.transform;
-        }
-        if (isBonded() && !B.isBonded())
-        {
-            B.transform.parent = transform.parent;
-        }
-        if (!isBonded() && B.isBonded())
-        {
-            transform.parent = B.transform.parent;
-        }
-        //if both are bonded ... make A ingests Molecule Badsaasdsasdsa
-        //molecule loops through kids => if ATom => new Parent is the other molecule ... then Destroy mole
-    }
-
 
     bool isFull()
     {
@@ -158,34 +118,36 @@ public class Atom : MonoBehaviour
         return !B.isFull() && !isFull();
     }
 
-    Transform closest()
-    {
-        return transform;
-    }
-
     Transform closestToMe()
     {
         Transform closest = null;
         float closestDist = maxDistance;
-        foreach (Transform child in transform.parent)
+        foreach (GameObject other in GameObject.FindGameObjectsWithTag("Atom"))
         {
+            
             //loop through siblings
 
-            float dist = Vector3.Distance(transform.position, child.position);
-
-            if (dist < maxDistance && dist < closestDist && !isSame(transform, child))
+            float dist = Vector3.Distance(transform.position, other.transform.position);
+           
+            if (dist < closestDist && !isSame(transform, other.transform) && other.GetComponent<Atom>())
             {
-                closest = child;
+                closest = other.transform;
                 closestDist = dist;
             }
         }
         Debug.Log(closestDist);
         return closest;
-
     }
-
+    
     // Update is called once per frame
     void Update()
     {
+        if (grabbed && GetComponentInParent<Molecule>().size() <= 1)
+            //only you as Atom? molecule == you. But if you're in a cluster only move yourself on dragging
+
+            //***for later molecule connects ==> mergeAnimation and molecule space collapsing function functions
+        {
+            transform.parent.position = transform.position;
+        }
     }
 }

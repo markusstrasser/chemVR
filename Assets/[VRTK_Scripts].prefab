@@ -664,7 +664,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   objectControlScript: {fileID: 114995077558873620}
   listenOnAxisChange: 0
-  maximumSpeed: 3
+  maximumSpeed: 2
   deceleration: 0.1
   fallingDeceleration: 0.01
   speedMultiplier: 1.5
@@ -768,7 +768,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   objectControlScript: {fileID: 114995077558873620}
   listenOnAxisChange: 1
-  maximumSpeed: 3
+  maximumSpeed: 2
   deceleration: 0.1
   fallingDeceleration: 0.01
   speedMultiplier: 1.5
@@ -887,7 +887,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   objectControlScript: {fileID: 114783126729517944}
   listenOnAxisChange: 0
-  maximumSpeed: 3
+  maximumSpeed: 1
   deceleration: 0.1
   fallingDeceleration: 0.01
   speedMultiplier: 1.5
@@ -1373,7 +1373,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   objectControlScript: {fileID: 114783126729517944}
   listenOnAxisChange: 1
-  maximumSpeed: 3
+  maximumSpeed: 1
   deceleration: 0.1
   fallingDeceleration: 0.01
   speedMultiplier: 1.5

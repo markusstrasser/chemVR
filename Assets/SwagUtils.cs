@@ -10,6 +10,21 @@ public class SwagUtils : MonoBehaviour {
         public LineRenderer lRender;
         public int segments = 2;
 
+
+        public void DrawBonds(Transform a, List<Transform> bs)
+        {
+            int counter = 0;
+            foreach(Transform b in bs)
+            {
+                counter++;
+                if (counter > 10)
+                {
+                    return;
+                }
+                CreateLine(a, b);
+            }
+        }
+
         public void CreateLine(Transform a, Transform b)
         {
             LineRenderer line = GameObject.Instantiate(lRender as LineRenderer);
@@ -19,7 +34,7 @@ public class SwagUtils : MonoBehaviour {
             Vector3 deltaVec = b.position - a.position;
             Vector3 step = deltaVec / segments;
 
-            for (int i = 0; i <= segments; i++)
+            for (int i = 0; i < segments; i++)
             {
                 line.SetPosition(i, a.position + (step * i));
             }

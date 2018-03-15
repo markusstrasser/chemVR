@@ -11,7 +11,7 @@ public class Electron : MonoBehaviour {
     Transform to;
 	// Use this for initialization
 	void Start () {
-        gameObject.tag = "Electron";
+        //gameObject.tag = "Electron";
         transform.localScale = new Vector3(scale, scale, scale);
     }
 

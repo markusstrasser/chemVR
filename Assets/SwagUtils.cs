@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
+using TMPro;
+using AtomConfig;
 
 
 namespace Swag
@@ -13,16 +15,67 @@ public class SwagUtils : MonoBehaviour {
 
         public void DrawBonds(Transform a, List<Transform> bs)
         {
-            int counter = 0;
             foreach(Transform b in bs)
-            {
-                counter++;
-                if (counter > 10)
-                {
-                    return;
-                }
+            {      
                 CreateLine(a, b);
             }
+        }
+
+
+        public string AtomText(int p, int e, int n)
+        {
+            ChemistryCalc chem = GameObject.Find("ChemistryCalc").GetComponent<ChemistryCalc>();
+            string text = "<sub>" + p.ToString() + "</sub>" + PTable.config[p] + "<sup>" + ChargeNess(p, e) + "</sup>";
+
+           // gameObject.tag = "Defined";
+
+            return text;
+        }
+
+        public string MoleculeText(Dictionary<string,int> composition)
+        {
+            string text = "";
+            foreach(KeyValuePair<string, int> entry in composition)
+            {
+                text += entry.Key;
+
+                    if (entry.Value > 1) { //no H2O1
+                    text += entry.Value.ToString();
+                }
+            }
+            return text;
+        }
+
+        public Dictionary<string, int> elementComposition(Transform father)
+        {
+            Dictionary<string, int> elements = new Dictionary<string, int>();
+            foreach (Transform child in father)
+            {
+                string symb = child.GetComponent<Atom>().state.symbol;
+                if (elements.ContainsKey(symb))
+                {
+                    elements[symb]++;
+                }
+                else
+                {
+                    elements[symb] = 1;
+                }
+            }
+            return elements;
+        }
+
+        public string ChargeNess(int protons, int electrons)
+        {
+            int charge = protons - electrons;
+            if (charge > 0)
+            {
+                return charge.ToString() + "+";
+            }
+            else if (charge < 0)
+            {
+                return charge.ToString() + "-";
+            }
+            else return "";
         }
 
         public void CreateLine(Transform a, Transform b)
@@ -36,8 +89,15 @@ public class SwagUtils : MonoBehaviour {
 
             for (int i = 0; i < segments; i++)
             {
-                line.SetPosition(i, a.position + (step * i));
+                line.SetPosition(i, a.position + ((step) * i));
             }
+            line.SetPosition(segments - 1, b.position); //last piece
+            line.tag = "bond";
+        }
+
+        public void removeChildrenWithType()
+        {
+
         }
 
         void sort()

@@ -63,7 +63,7 @@ namespace AtomConfig
         public float EN; //ElectroNegativity
         public Atom[] bonded;
     }
-    public class PTable
+    public static class PTable
     {
         public static int[] OrbitCapacity = new int[] { 2, 8, 18 };
         public static List<Config> config = new List<Config>(){

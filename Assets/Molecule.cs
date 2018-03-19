@@ -42,7 +42,6 @@ public class Molecule : MonoBehaviour {
     {
         return ".reduce";
     }
-	
 	// Update is called once per frame
 	void Update () {
 		

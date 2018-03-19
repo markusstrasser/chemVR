@@ -26,6 +26,14 @@ public class Atom : MonoBehaviour
     {
         grabbed = true;
         Debug.Log("Im Grabbed   " + gameObject);
+        //remove linerenders that point to me and that I have as children
+        foreach (Transform child in transform)
+        {
+            if (child.tag == "bond")
+            {
+                Destroy(child.gameObject);
+            }
+        }
 
     }
     List<Transform> removeDuplicates(List<Transform> trans)
@@ -52,15 +60,13 @@ public class Atom : MonoBehaviour
         if (isLegitBond(other))
         {
             mergeElements(other);
-            //to.Add(other);
-            //List<Transform> unique = removeDuplicates(to);
-          
-            Debug.Log("TOOOO" +  to + "  to  " + to.Count);
-
+            to.Add(other);
+            List<Transform> unique = removeDuplicates(to);
+         
             Debug.Log(transform.name + "  bonded with  " + other.name);
-          //  swagger.DrawBonds(transform, to);
+            Debug.Log("to count: " + to.Count + "   uniq co :   " + unique.Count);
+            swagger.DrawBonds(transform, unique);
         }
-
         if (other == null)
         {
             Debug.Log("NOTHING TO BOND ----> >>> ");
@@ -121,11 +127,14 @@ public class Atom : MonoBehaviour
             for (int i = 0; i < len; i++)
             {
                 //GameObject c = Instantiate<GameObject>(B.parent.GetChild(i).gameObject);
-                B.parent.GetChild(i).parent = transform.parent;
+               B.parent.GetChild(0).parent = transform.parent;
+               //transform.parent.GetChild(0).parent = B.parent;
 
             }
+            
+            transform.parent.GetComponent<Molecule>().name
             //**** ---- BUG: Atom doesn't move ...before Molecule dies....Pulse does...)
-            B.parent.gameObject.SetActive(false);
+           // B.parent.gameObject.SetActive(false);
             //Destroy(B.parent.gameObject);
         }
         //give me all B's children

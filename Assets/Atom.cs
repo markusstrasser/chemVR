@@ -5,6 +5,7 @@ using AtomConfig;
 using Swag;
 using VRTK;
 using System.Linq;
+using System.Collections;
 
 [System.Serializable] //show Lists in inspector
 public class Atom : MonoBehaviour
@@ -12,21 +13,35 @@ public class Atom : MonoBehaviour
     public Config state;
     public Electron electron;
     public List<Transform> to = new List<Transform>();
+    public List<Transform> from = new List<Transform>();
     public Bond bond;
     public SwagUtils swagger;
     GameObject myParent;
     public bool grabbed = false;
     public float maxDistance = 0.5f;
+    public Molecule mol;
+    public Molecule m;
+       
     // public LineRenderer lRender;
 
 
 
     public void ObjectGrabbed(object sender, InteractableObjectEventArgs e)
-
     {
         grabbed = true;
         Debug.Log("Im Grabbed   " + gameObject);
         //remove linerenders that point to me and that I have as children
+        removeTies(from, gameObject);
+        removeLineRender();
+
+        m = Instantiate<Molecule>(mol);
+        m.name = "yar" + UnityEngine.Random.Range(0f, 100f).ToString();
+        transform.parent = m.transform;
+
+    }
+
+    public void removeLineRender()
+    {
         foreach (Transform child in transform)
         {
             if (child.tag == "bond")
@@ -34,8 +49,34 @@ public class Atom : MonoBehaviour
                 Destroy(child.gameObject);
             }
         }
-
     }
+
+    void removeTies(List<Transform> ties, GameObject me)
+    {
+        //loop through links
+        //destroy all that link to this atom
+        //remove the entry of the atom from the .from list
+
+        int myId = me.GetInstanceID();
+        foreach (Transform nodeAtom in ties)
+        {
+                            Debug.Log("HEEEEEELLOO removeTies");
+
+            Atom node = nodeAtom.GetComponent<Atom>();
+            foreach (Transform linkTo in node.to)
+            {
+                bool isMe = linkTo.gameObject.GetInstanceID() == myId;
+                Debug.Log(isMe + " isMe", node);
+                if (isMe)
+                {
+                    node.to.Remove(linkTo);
+                }
+            }
+            node.removeLineRender();
+            node.tick();
+        }
+    }
+
     List<Transform> removeDuplicates(List<Transform> trans)
     {
         List<int> ids = new List<int> { };
@@ -55,22 +96,69 @@ public class Atom : MonoBehaviour
 
     public void ObjectUnGrabbed(object sender, InteractableObjectEventArgs e)
     {
+        transform.parent = m.transform; //2 hour BUG ---- the Atom without any reason switched back to original parent;
+        unGrab();
         grabbed = false;
+
+    }
+
+    public void unGrab()
+    {
+
+        KillEmptyMolecules();
         Transform other = closestToMe();
-        if (isLegitBond(other))
-        {
-            mergeElements(other);
-            to.Add(other);
-            List<Transform> unique = removeDuplicates(to);
-         
-            Debug.Log(transform.name + "  bonded with  " + other.name);
-            Debug.Log("to count: " + to.Count + "   uniq co :   " + unique.Count);
-            swagger.DrawBonds(transform, unique);
-        }
-        if (other == null)
+        bonding(other);
+
+       
+       if (other == null)
         {
             Debug.Log("NOTHING TO BOND ----> >>> ");
+            from.Clear();
+            to.Clear();
         }
+        tick();
+    }
+
+    void KillEmptyMolecules ()
+    {
+        foreach (GameObject mol in GameObject.FindGameObjectsWithTag("Molecule"))
+        {
+            int count = 0;
+            foreach (Transform child in mol.transform)
+            {
+                if (child.tag == "Atom")
+                {
+                    count++;
+                }
+
+            }
+            if (count == 0)
+            {
+                Destroy(mol);
+            }
+        }
+    }
+
+    void bonding(Transform other)
+    {
+        if (isLegitBond(other))
+        {
+            Debug.Log("LEGIT BOND TRUE");
+            mergeElements(other);
+            to.Add(other);
+            other.GetComponent<Atom>().from.Add(transform);
+            other.GetComponent<Atom>().tick();
+        }
+    }
+
+    public void tick()
+    {
+        to = removeDuplicates(to);
+        from = removeDuplicates(from);
+
+        swagger.DrawBonds(transform, to);
+      
+
     }
 
     bool isLegitBond(Transform B)
@@ -101,6 +189,9 @@ public class Atom : MonoBehaviour
         GetComponent<VRTK_InteractableObject>().InteractableObjectGrabbed += new InteractableObjectEventHandler(ObjectGrabbed);
         GetComponent<VRTK_InteractableObject>().InteractableObjectUngrabbed += new InteractableObjectEventHandler(ObjectUnGrabbed);
 
+        Dictionary<string,int> comp = swagger.elementComposition(transform.parent.transform);
+        string text = swagger.MoleculeText(comp);
+        Debug.Log(swagger.elementComposition(transform.parent.transform) + "   Dict");
     }
 
     public void Init(int atomNumber)
@@ -127,18 +218,20 @@ public class Atom : MonoBehaviour
             for (int i = 0; i < len; i++)
             {
                 //GameObject c = Instantiate<GameObject>(B.parent.GetChild(i).gameObject);
-               B.parent.GetChild(0).parent = transform.parent;
-               //transform.parent.GetChild(0).parent = B.parent;
-
+                if (B.parent.GetChild(i).tag == "Atom")
+                {
+                    B.parent.GetChild(i).parent = transform.parent;
+                    //transform.parent.GetChild(0).parent = B.parent;
+                }
             }
             
-            transform.parent.GetComponent<Molecule>().name
+           //transform.parent.GetComponent<Molecule>().name
             //**** ---- BUG: Atom doesn't move ...before Molecule dies....Pulse does...)
            // B.parent.gameObject.SetActive(false);
             //Destroy(B.parent.gameObject);
         }
         //give me all B's children
-
+      
         //destroy B. Now we're one!
     }
 
@@ -156,16 +249,16 @@ public class Atom : MonoBehaviour
     {
         Transform closest = null;
         float closestDist = maxDistance;
-        foreach (GameObject other in GameObject.FindGameObjectsWithTag("Atom"))
+        foreach (GameObject atom in GameObject.FindGameObjectsWithTag("Atom"))
         {
             
             //loop through siblings
 
-            float dist = Vector3.Distance(transform.position, other.transform.position);
+            float dist = Vector3.Distance(transform.position, atom.transform.position);
            
-            if (dist < closestDist && !isSame(transform, other.transform) && other.GetComponent<Atom>())
+            if (dist < closestDist && !isSame(transform, atom.transform) && atom.GetComponent<Atom>())
             {
-                closest = other.transform;
+                closest = atom.transform;
                 closestDist = dist;
             }
         }
@@ -181,7 +274,7 @@ public class Atom : MonoBehaviour
 
             //***for later molecule connects ==> mergeAnimation and molecule space collapsing function functions
         {
-            transform.parent.position = transform.position;
+            //transform.parent.position = transform.position;
         }
     }
 }

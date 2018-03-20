@@ -4,7 +4,7 @@ using UnityEngine;
 using System.Linq;
 using TMPro;
 using AtomConfig;
-
+using System;
 
 namespace Swag
 {
@@ -51,8 +51,10 @@ public class SwagUtils : MonoBehaviour {
             Dictionary<string, int> elements = new Dictionary<string, int>();
             foreach (Transform child in father)
             {
-                string symb = child.GetComponent<Atom>().state.symbol;
-                if (elements.ContainsKey(symb))
+                if (child.GetComponent<Atom>())
+                {
+                     string symb = child.GetComponent<Atom>().state.symbol;
+                     if (elements.ContainsKey(symb))
                 {
                     elements[symb]++;
                 }
@@ -60,6 +62,7 @@ public class SwagUtils : MonoBehaviour {
                 {
                     elements[symb] = 1;
                 }
+                }         
             }
             return elements;
         }
@@ -111,6 +114,11 @@ public class SwagUtils : MonoBehaviour {
             //HOW TO make <ATOM> general? So it works for <Molecule>, <Cell>
 
             //tmp.GetComponent<TextMeshManager>().DisplayText("yoyl");
+        }
+
+        internal string MoleculeText(IDictionary comp)
+        {
+            throw new NotImplementedException();
         }
 
 

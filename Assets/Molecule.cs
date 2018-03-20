@@ -1,16 +1,22 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using Swag;
+using TMPro;
 
 public class Molecule : MonoBehaviour {
     public GameObject atom;
+    SwagUtils swagger;
+
 	// Use this for initialization
 	void Start () {
-        Init(new List<int>() { 1 });
-	}
+        //Init(new List<int>() { 1 });
+        //--> done by Molecule Manager
+        swagger = GameObject.Find("Swag").GetComponent<SwagUtils>();
+        
+    }
 
-    void Init(List<int> atomnNumbers)
+    public void Init(List<int> atomnNumbers)
     {
         foreach (int num in atomnNumbers)
         {
@@ -21,7 +27,6 @@ public class Molecule : MonoBehaviour {
             at.GetComponent<Atom>().Init(num);
             
         }
-
         Debug.Log(size());
     }
     
@@ -36,6 +41,11 @@ public class Molecule : MonoBehaviour {
             }
         }
         return counter;
+    }
+
+    public void updateTextMesh()
+    {
+
     }
 
     string Naming(List <Atom> components)  

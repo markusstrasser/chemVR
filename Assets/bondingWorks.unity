@@ -651,7 +651,7 @@ Prefab:
     - target: {fileID: 224348929294147774, guid: b1581aacaba35664e80e3d0d9f2ea994,
         type: 2}
       propertyPath: m_AnchoredPosition.x
-      value: 914
+      value: 966
       objectReference: {fileID: 0}
     - target: {fileID: 224348929294147774, guid: b1581aacaba35664e80e3d0d9f2ea994,
         type: 2}
@@ -800,7 +800,7 @@ GameObject:
   - component: {fileID: 772200153}
   m_Layer: 0
   m_Name: Molecule
-  m_TagString: Untagged
+  m_TagString: Molecule
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1326,6 +1326,46 @@ GameObject:
   m_PrefabParentObject: {fileID: 1732282456327180, guid: b1581aacaba35664e80e3d0d9f2ea994,
     type: 2}
   m_PrefabInternal: {fileID: 592887818}
+--- !u!1 &2017006437
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 2017006439}
+  - component: {fileID: 2017006438}
+  m_Layer: 0
+  m_Name: MoleculeManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &2017006438
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 2017006437}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b9e1492821364534f94a7f1cda052d02, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!4 &2017006439
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 2017006437}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 8
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2079772997 stripped
 GameObject:
   m_PrefabParentObject: {fileID: 1280911367072418, guid: b1581aacaba35664e80e3d0d9f2ea994,

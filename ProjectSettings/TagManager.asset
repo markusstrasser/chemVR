@@ -9,6 +9,7 @@ TagManager:
   - TeleportIgnore
   - Atom
   - bond
+  - Molecule
   layers:
   - Default
   - TransparentFX

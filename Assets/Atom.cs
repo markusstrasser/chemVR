@@ -24,6 +24,13 @@ public class Atom : MonoBehaviour
        
     // public LineRenderer lRender;
 
+    //call state => config
+    //make state just a backup
+    //config.valence vs valence
+    //make PTable a Struct
+    //use delegates for successful bonding
+
+
 
 
     public void ObjectGrabbed(object sender, InteractableObjectEventArgs e)
@@ -189,9 +196,9 @@ public class Atom : MonoBehaviour
         GetComponent<VRTK_InteractableObject>().InteractableObjectGrabbed += new InteractableObjectEventHandler(ObjectGrabbed);
         GetComponent<VRTK_InteractableObject>().InteractableObjectUngrabbed += new InteractableObjectEventHandler(ObjectUnGrabbed);
 
-        Dictionary<string,int> comp = swagger.elementComposition(transform.parent.transform);
-        string text = swagger.MoleculeText(comp);
-        Debug.Log(swagger.elementComposition(transform.parent.transform) + "   Dict");
+        Dictionary<string,int> comp = SwagUtils.elementComposition(transform.parent.transform);
+        string text = SwagUtils.MoleculeText(comp);
+        Debug.Log(SwagUtils.elementComposition(transform.parent.transform) + "   Dict");
     }
 
     public void Init(int atomNumber)
@@ -274,7 +281,7 @@ public class Atom : MonoBehaviour
 
             //***for later molecule connects ==> mergeAnimation and molecule space collapsing function functions
         {
-            //transform.parent.position = transform.position;
+            transform.parent.position = transform.position;
         }
     }
 }

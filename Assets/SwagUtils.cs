@@ -32,7 +32,33 @@ public class SwagUtils : MonoBehaviour {
             return text;
         }
 
-        public string MoleculeText(Dictionary<string,int> composition)
+        Transform closestTo(Transform trans, string tag = "Atom", float maxDistance = 2f)
+        {
+            Transform closest = null;
+            float closestDist = maxDistance;
+            foreach (GameObject elem in GameObject.FindGameObjectsWithTag(tag))
+            {
+
+                //loop through siblings
+
+                float dist = Vector3.Distance(transform.position, elem.transform.position);
+
+                if (dist < closestDist && !isSame(transform, elem.transform) && elem.GetComponent<Atom>())
+                {
+                    closest = elem.transform;
+                    closestDist = dist;
+                }
+            }
+            Debug.Log(closestDist);
+            return closest;
+        }
+
+        static bool isSame(Transform t1, Transform t2)
+        {
+            return (t1.GetInstanceID() == t2.GetInstanceID());
+        }
+
+        public static string MoleculeText(Dictionary<string,int> composition)
         {
             string text = "";
             foreach(KeyValuePair<string, int> entry in composition)
@@ -46,7 +72,7 @@ public class SwagUtils : MonoBehaviour {
             return text;
         }
 
-        public Dictionary<string, int> elementComposition(Transform father)
+        public static Dictionary<string, int> elementComposition(Transform father)
         {
             Dictionary<string, int> elements = new Dictionary<string, int>();
             foreach (Transform child in father)

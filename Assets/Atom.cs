@@ -29,6 +29,7 @@ public class Atom : MonoBehaviour
     //config.valence vs valence
     //make PTable a Struct
     //use delegates for successful bonding
+	//to ==> dictionary .containskey
 
 
 
@@ -51,7 +52,9 @@ public class Atom : MonoBehaviour
     {
         foreach (Transform child in transform)
         {
-            if (child.tag == "bond")
+            
+			//TODO GETcomponentsInChildren
+			if (child.tag == "bond")
             {
                 Destroy(child.gameObject);
             }
@@ -63,7 +66,6 @@ public class Atom : MonoBehaviour
         //loop through links
         //destroy all that link to this atom
         //remove the entry of the atom from the .from list
-
         int myId = me.GetInstanceID();
         foreach (Transform nodeAtom in ties)
         {
@@ -177,7 +179,7 @@ public class Atom : MonoBehaviour
     void Start()
     {
         //get data from chemical table
-        Init(1);
+        //Init(1);
         swagger = GameObject.Find("Swag").GetComponent<SwagUtils>();
 
 

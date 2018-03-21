@@ -4,7 +4,56 @@ using UnityEngine;
 
 namespace AtomConfig
 {
-    public class Bond
+    public class Bonds
+    {
+        public Dictionary<KeyValuePair<Atom, Atom>, int> data;
+        public Bonds() {
+
+        }
+
+        public void RemoveBonds(Atom A)
+        {
+            //remove all entries with A in it from data
+        }
+
+        public void AddBond(KeyValuePair<Atom, Atom> bond)
+        {
+            bool isThere = data.ContainsKey(bond);
+            KeyValuePair<Atom, Atom> reverse = new KeyValuePair<Atom, Atom>(bond.Value, bond.Key);
+            bool isThereReverse = data.ContainsKey(reverse);
+
+            if (isThere && isThereReverse)
+            //merge with the other bond --> direction doesn't count
+            //maybe let normal and reversed coexist?? someday
+            {
+                int otherStrength = data[reverse];
+                data[bond] += otherStrength;
+                data.Remove(reverse);
+            }
+            else if (isThere && !isThereReverse)
+            {
+                data[bond]++;
+            }
+            else if (!isThere && isThereReverse)
+            {
+                data[reverse]++;
+            }
+            else if (!isThere && !isThereReverse)
+            {
+                data.Add(bond, 1);
+            }
+        }
+        public bool isValidBond(Atom A, Atom B)
+        {
+            bool isEmpty = (A == null || B == null);
+            bool isSame = (A == B);
+            bool canConnect = A.isFull() && B.isFull();
+
+            return !isEmpty && !isSame && canConnect;
+        }
+    }
+
+    public class BondTester
     {
         //ionic bonds don't share Electrons. The higher EN Atom just takes it
         //covalent bonds both ++ a valence Electron
@@ -13,7 +62,7 @@ namespace AtomConfig
         public Atom to;
         public Atom self;
         public Atom stronger;
-        public Bond(Atom myself, Atom other)
+        public BondTester(Atom myself, Atom other)
         {
             type = BondType(myself, other);
             to = other;

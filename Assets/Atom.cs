@@ -14,7 +14,6 @@ public class Atom : MonoBehaviour
     public Electron electron;
     public List<Transform> to = new List<Transform>();
     public List<Transform> from = new List<Transform>();
-    public Bond bond;
     public SwagUtils swagger;
     GameObject myParent;
     public bool grabbed = false;
@@ -41,6 +40,7 @@ public class Atom : MonoBehaviour
         //remove linerenders that point to me and that I have as children
         removeTies(from, gameObject);
         removeLineRender();
+        
 
         m = Instantiate<Molecule>(mol);
         m.name = "yar" + UnityEngine.Random.Range(0f, 100f).ToString();
@@ -69,8 +69,7 @@ public class Atom : MonoBehaviour
         int myId = me.GetInstanceID();
         foreach (Transform nodeAtom in ties)
         {
-                            Debug.Log("HEEEEEELLOO removeTies");
-
+            Debug.Log("HEEEEEELLOO removeTies");
             Atom node = nodeAtom.GetComponent<Atom>();
             foreach (Transform linkTo in node.to)
             {
@@ -117,6 +116,8 @@ public class Atom : MonoBehaviour
         KillEmptyMolecules();
         Transform other = closestToMe();
         bonding(other);
+
+        transform.GetComponentInParent<Molecule>().AddPair(this, other.GetComponent<Atom>());
 
        
        if (other == null)
@@ -244,7 +245,7 @@ public class Atom : MonoBehaviour
         //destroy B. Now we're one!
     }
 
-    bool isFull()
+    public bool isFull()
     {
         return (state.valence == state.capacity) || state.valence == 0;
     }
@@ -285,5 +286,10 @@ public class Atom : MonoBehaviour
         {
             transform.parent.position = transform.position;
         }
+        if (Input.GetKeyDown("space"))
+        {
+            unGrab();
+        }
+
     }
 }

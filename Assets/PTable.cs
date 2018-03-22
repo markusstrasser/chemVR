@@ -6,7 +6,7 @@ namespace AtomConfig
 {
     public class Bonds
     {
-        public Dictionary<KeyValuePair<Atom, Atom>, int> data;
+        public Dictionary<KeyValuePair<Atom, Atom>, int> data = new Dictionary<KeyValuePair<Atom, Atom>, int>();
         public Bonds() {
 
         }
@@ -47,7 +47,7 @@ namespace AtomConfig
         {
             bool isEmpty = (A == null || B == null);
             bool isSame = (A == B);
-            bool canConnect = A.isFull() && B.isFull();
+            bool canConnect = !A.isFull() && !B.isFull();
 
             return !isEmpty && !isSame && canConnect;
         }

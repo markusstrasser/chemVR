@@ -21,13 +21,19 @@ public class Molecule : MonoBehaviour {
     }
     public void AddPair(Atom A, Atom B)
     {
+        Debug.Log("BONDs count before:" + bonds.data.Count);
+
         KeyValuePair<Atom, Atom> bond = new KeyValuePair<Atom, Atom>(A, B);
         if (bonds.isValidBond(A, B))
         {
             Debug.Log("VALID BONDING!! " + A + "asdsaa" + B);
             bonds.AddBond(bond);
         }
-        Debug.Log("BONDS:" + bonds.data.ContainsKey(bond));
+        Debug.Log("BOND keys:" + bonds.data.Keys);
+        Debug.Log("BOND values:" + bonds.data.Values);
+        Debug.Log("BONDs count:" + bonds.data.Count);
+
+
     }
 
     public void Init(List<int> atomnNumbers)

@@ -79,7 +79,7 @@ public class SwagUtils : MonoBehaviour {
             {
                 if (child.GetComponent<Atom>())
                 {
-                     string symb = child.GetComponent<Atom>().state.symbol;
+                     string symb = child.GetComponent<Atom>().config.symbol;
                      if (elements.ContainsKey(symb))
                 {
                     elements[symb]++;

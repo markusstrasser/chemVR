@@ -11,8 +11,11 @@ namespace AtomConfig
 
         }
 
+        public void 
+
         public void RemoveBonds(Atom A)
         {
+            
             //remove all entries with A in it from data
         }
 
@@ -74,27 +77,28 @@ namespace AtomConfig
         {
             if (type == "ionic")
             {
-                if (self.state.EN > to.state.EN)
+                if (self.config.EN > to.config.EN)
                 {
-                    self.state.valence++;
-                    to.state.valence--;
+                    self.config.valence++;
+                    to.config.valence--;
                 }
                 else
                 {
-                    self.state.valence--;
-                    to.state.valence++;
+                    self.config.valence--;
+                    to.config.valence++;
                 }
             }
             else if (type == "covalent")
             {
-                self.state.valence++;
-                to.state.valence++;
+                //will be an issue with visualization --> not actually more electrons in scene
+                self.config.valence++;
+                to.config.valence++;
             }
         }
 
         string BondType(Atom A, Atom B)
         {
-            float deltaEN = Mathf.Abs(A.state.EN - B.state.EN);
+            float deltaEN = Mathf.Abs(A.config.EN - B.config.EN);
             if (deltaEN > ENTreshold)
             {
                 return "ionic";

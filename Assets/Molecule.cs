@@ -4,12 +4,19 @@ using UnityEngine;
 using Swag;
 using TMPro;
 using AtomConfig;
+using seeDict;
+using UnityEditor;
+using System.Linq;
 
-[SerializeField]
+[System.Serializable] //show Lists in inspector
+
 public class Molecule : MonoBehaviour {
     public GameObject atom;
     SwagUtils swagger;
     public Bonds bonds;
+    public List<Atom> Atom_1 = new List<Atom>();
+    public List<Atom> Atom_2 = new List<Atom>();
+    public List<int> strengthsEdit = new List<int> { 0 };
 
 	// Use this for initialization
 	void Start () {
@@ -25,15 +32,35 @@ public class Molecule : MonoBehaviour {
 
         KeyValuePair<Atom, Atom> bond = new KeyValuePair<Atom, Atom>(A, B);
         if (bonds.isValidBond(A, B))
-        {
+        { 
+
             Debug.Log("VALID BONDING!! " + A + "asdsaa" + B);
             bonds.AddBond(bond);
+
+            makeVisibleInEditor(bonds.data);
         }
         Debug.Log("BOND keys:" + bonds.data.Keys);
         Debug.Log("BOND values:" + bonds.data.Values);
         Debug.Log("BONDs count:" + bonds.data.Count);
+    }
 
-
+    void makeVisibleInEditor(Dictionary<KeyValuePair<Atom,Atom>, int> bondData)
+    {
+        Atom_1.Clear();
+        Atom_2.Clear();
+        strengthsEdit.Clear();
+        foreach (KeyValuePair<Atom, Atom> kvp in bonds.data.Keys)
+        {
+            Atom_1.Add(kvp.Key);
+        }
+        foreach (KeyValuePair<Atom, Atom> kvp in bonds.data.Keys)
+        {
+            Atom_2.Add(kvp.Value);
+        }
+        foreach (int strength in bonds.data.Values)
+        {
+            strengthsEdit.Add(strength);
+        }
     }
 
     public void Init(List<int> atomnNumbers)

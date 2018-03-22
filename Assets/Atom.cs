@@ -10,7 +10,9 @@ using System.Collections;
 [System.Serializable] //show Lists in inspector
 public class Atom : MonoBehaviour
 {
-    public Config state;
+    public Config config;
+    int shared = 0;
+    int lost = 0;
     public Electron electron;
     public List<Transform> to = new List<Transform>();
     public List<Transform> from = new List<Transform>();
@@ -184,7 +186,7 @@ public class Atom : MonoBehaviour
         swagger = GameObject.Find("Swag").GetComponent<SwagUtils>();
 
 
-        for (int i = 0; i < state.capacity; i++)
+        for (int i = 0; i < config.capacity; i++)
         {
             Electron ele = Instantiate<Electron>(electron);
             ele.transform.parent = transform;
@@ -206,7 +208,7 @@ public class Atom : MonoBehaviour
 
     public void Init(int atomNumber)
     {
-        state = AtomConfig.PTable.config[atomNumber];
+        config = AtomConfig.PTable.config[atomNumber];
     }
 
     bool isSame(Transform t1, Transform t2)
@@ -247,7 +249,7 @@ public class Atom : MonoBehaviour
 
     public bool isFull()
     {
-        return (state.valence == state.capacity) || state.valence == 0;
+        return (config.valence == config.capacity) || config.valence == 0;
     }
     bool CanConnect(Atom B)
     {

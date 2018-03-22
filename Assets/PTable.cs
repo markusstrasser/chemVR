@@ -130,12 +130,13 @@ namespace AtomConfig
         public int capacity;
         public float EN; //ElectroNegativity
         public Atom[] bonded;
+        public int valenceOrbit;
     }
     public static class PTable
     {
         public static int[] OrbitCapacity = new int[] { 2, 8, 18 };
         public static List<Config> config = new List<Config>(){
-            
+
             new Config()
             {
                 name = "noAtom"
@@ -144,17 +145,19 @@ namespace AtomConfig
                  name = "Hydrogen",
                  symbol = "H",
                  protons = 1,
-                 valence = 6,
+                 valence = 1,
                  EN = 2.2f,
-                 capacity = 1,
+                 capacity = 2,
+                 valenceOrbit = 1
              },
              new Config(){
                  name = "Oxygen",
                  symbol = "O",
                  protons = 8,
                  valence = 6,
-                 capacity = 2,
-                 EN = 3.44f
+                 capacity = 8,
+                 EN = 3.44f,
+                 valenceOrbit = 2,
              }
         };
     }

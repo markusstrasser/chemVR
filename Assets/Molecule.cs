@@ -25,6 +25,43 @@ public class Molecule : MonoBehaviour {
         //--> done by Molecule Manager
         swagger = GameObject.Find("Swag").GetComponent<SwagUtils>();
     }
+
+    void changeVisuals ()
+    {
+        List<Vector3> pos = new List<Vector3>();
+        List<Transform> children = new List<Transform>();
+
+        foreach (Transform child in transform)
+        {
+
+            if (transform.GetComponent<Atom>())
+            {
+                pos.Add(child.position);
+            }
+            children.Add(child);
+
+        }
+
+        //reduce
+
+
+        Vector3 center = pos.Aggregate(Vector3.zero, (acc, p) => acc + p) / pos.Count;
+
+        //unchild
+        foreach(Transform child in children)
+        {
+            child.parent = null;
+        }
+        transform.position = center;
+        foreach (Transform child in children)
+        {
+            child.parent = transform;
+        }
+
+        transform.FindChild("Pulse").localScale *= 2;
+
+
+    }
     public void AddPair(Atom A, Atom B)
     {
         KeyValuePair<Atom, Atom> bond = new KeyValuePair<Atom, Atom>(A, B);
@@ -34,6 +71,7 @@ public class Molecule : MonoBehaviour {
             bonds.AddBond(bond);
             updateBonds();
             makeVisibleInEditor(bonds.data);
+            changeVisuals();
 
             //mergeElements
 

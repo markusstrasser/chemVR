@@ -10,6 +10,7 @@ TagManager:
   - Atom
   - bond
   - Molecule
+  - Pulse
   layers:
   - Default
   - TransparentFX

@@ -11,6 +11,7 @@ using System.Collections;
 public class Atom : MonoBehaviour
 {
     public Config config;
+    public int valence;
     public int shared = 0;
     public int lost = 0;
     public Electron electron;
@@ -31,7 +32,7 @@ public class Atom : MonoBehaviour
         //Init(1);
         swagger = GameObject.Find("Swag").GetComponent<SwagUtils>();
 
-        for (int i = 0; i < config.capacity; i++)
+        for (int i = 0; i < config.valence; i++)
         {
             Electron ele = Instantiate<Electron>(electron);
             ele.transform.parent = transform;
@@ -122,12 +123,15 @@ public class Atom : MonoBehaviour
 
     public bool isFull()
     {
-        int valence = config.valence + shared - lost;
+        valence = config.valence + shared - lost;
+        Debug.Log(valence + "val" + config.capacity + " : capacity");
         if (valence > config.capacity)
         {
             Debug.Log("ahh VALENCE > Config.CApacity...what's going on?!");
+            return true;
         }
-        return (valence == config.capacity) || valence == 0;
+        Debug.Log("is full?");
+        return (valence >= config.capacity) || valence == 0;
     }
 
 

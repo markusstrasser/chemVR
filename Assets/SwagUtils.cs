@@ -72,6 +72,27 @@ public class SwagUtils : MonoBehaviour {
             return text;
         }
 
+        public static string MoleculeTextPlus(Dictionary<string, int> composition, int charge =0)
+        {
+            string text = "";
+            foreach (KeyValuePair<string, int> entry in composition)
+            {
+                text += entry.Key;
+                //9x<sup><#00ff00>3</color></sup>
+                if (entry.Value > 1)
+                { //no H2O1
+                    text += "<sub>" + entry.Value.ToString() + "</sub>";
+                }
+            }
+            if (charge != 0)
+            {
+                //TODO -1 => - ... 1 ==> + ...for single charges only
+                text += "<sup>" + charge + "</sup>";
+            }
+       
+            return text;
+        }
+
         public static Dictionary<string, int> elementComposition(Transform father)
         {
             Dictionary<string, int> elements = new Dictionary<string, int>();

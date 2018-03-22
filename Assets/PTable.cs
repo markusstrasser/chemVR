@@ -6,18 +6,63 @@ namespace AtomConfig
 {
     public class Bonds
     {
+        public float ENTreshold = 1.8f;
         public Dictionary<KeyValuePair<Atom, Atom>, int> data = new Dictionary<KeyValuePair<Atom, Atom>, int>();
         public Bonds() {
 
         }
 
-        public void 
-
         public void RemoveBonds(Atom A)
         {
-            
+            A.ResetState();
+
+            //maybe use .maping next time
+            //parameterList.Remove(parameterList.Where(k => String.Compare(k.Key, "someKeyName") == 0)); 
+            foreach (KeyValuePair<Atom, Atom> kvp in data.Keys)
+            {
+                if (kvp.Key == A || kvp.Value == A)
+                {
+                    data.Remove(kvp);
+                }
+            }
             //remove all entries with A in it from data
         }
+
+        public void ElectronTrading(Atom A, Atom B, string type)
+        {
+            if (type == "ionic")
+            {
+                if (A.config.EN > B.config.EN)
+                {
+                    A.shared++; //isn't sharing technically but for now no need to make extra variable "stolen"
+                    B.lost++;
+                }
+                else
+                {
+                    A.lost++;
+                    B.shared++;
+                }
+            }
+            else if (type == "covalent")
+            {
+                //will be an issue with visualization --> not actually more electrons in scene
+                // ___solved___ .config remains immutable
+                A.shared++;
+                B.shared++;
+            }
+        }
+
+        public string BondType(Atom A, Atom B)
+        {
+            float deltaEN = Mathf.Abs(A.config.EN - B.config.EN);
+            if (deltaEN > ENTreshold)
+            {
+                return "ionic";
+            }
+            return "covalent";
+        }
+
+        //if bond is ionic => steal else share
 
         public void AddBond(KeyValuePair<Atom, Atom> bond)
         {
@@ -61,50 +106,20 @@ namespace AtomConfig
         //ionic bonds don't share Electrons. The higher EN Atom just takes it
         //covalent bonds both ++ a valence Electron
         public string type;
-        public float ENTreshold = 1.8f;
         public Atom to;
         public Atom self;
         public Atom stronger;
         public BondTester(Atom myself, Atom other)
         {
-            type = BondType(myself, other);
+            //type = BondType(myself, other);
             to = other;
             self = myself;
-            ElectronTrading(type);
+            //ElectronTrading(type);
         }
 
-        void ElectronTrading(string type)
-        {
-            if (type == "ionic")
-            {
-                if (self.config.EN > to.config.EN)
-                {
-                    self.config.valence++;
-                    to.config.valence--;
-                }
-                else
-                {
-                    self.config.valence--;
-                    to.config.valence++;
-                }
-            }
-            else if (type == "covalent")
-            {
-                //will be an issue with visualization --> not actually more electrons in scene
-                self.config.valence++;
-                to.config.valence++;
-            }
-        }
+       
 
-        string BondType(Atom A, Atom B)
-        {
-            float deltaEN = Mathf.Abs(A.config.EN - B.config.EN);
-            if (deltaEN > ENTreshold)
-            {
-                return "ionic";
-            }
-            return "covalent";
-        }
+      
     }
 
     public class Config {

@@ -11,8 +11,8 @@ using System.Collections;
 public class Atom : MonoBehaviour
 {
     public Config config;
-    int shared = 0;
-    int lost = 0;
+    public int shared = 0;
+    public int lost = 0;
     public Electron electron;
     public List<Transform> to = new List<Transform>();
     public List<Transform> from = new List<Transform>();
@@ -34,7 +34,11 @@ public class Atom : MonoBehaviour
 
 
 
-
+    public void ResetState()
+    {
+        shared = 0;
+        lost = 0;
+    }
     public void ObjectGrabbed(object sender, InteractableObjectEventArgs e)
     {
         grabbed = true;
@@ -249,7 +253,12 @@ public class Atom : MonoBehaviour
 
     public bool isFull()
     {
-        return (config.valence == config.capacity) || config.valence == 0;
+        int valence = config.valence + shared - lost;
+        if (valence > config.capacity)
+        {
+            Debug.Log("ahh VALENCE > Config.CApacity...what's going on?!");
+        }
+        return (valence == config.capacity) || valence == 0;
     }
     bool CanConnect(Atom B)
     {

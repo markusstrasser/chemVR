@@ -24,24 +24,21 @@ public class Molecule : MonoBehaviour {
         //Init(new List<int>() { 1 });
         //--> done by Molecule Manager
         swagger = GameObject.Find("Swag").GetComponent<SwagUtils>();
-        
     }
     public void AddPair(Atom A, Atom B)
     {
-        Debug.Log("BONDs count before:" + bonds.data.Count);
-
         KeyValuePair<Atom, Atom> bond = new KeyValuePair<Atom, Atom>(A, B);
         if (bonds.isValidBond(A, B))
         { 
-
             Debug.Log("VALID BONDING!! " + A + "asdsaa" + B);
             bonds.AddBond(bond);
-
+            updateBonds();
             makeVisibleInEditor(bonds.data);
+
+            Dictionary<string, int> composition = SwagUtils.elementComposition(transform);
+            string molText = SwagUtils.MoleculeTextPlus(composition);
+            transform.GetComponentInChildren<TextMeshManager>().DisplayText(molText);
         }
-        Debug.Log("BOND keys:" + bonds.data.Keys);
-        Debug.Log("BOND values:" + bonds.data.Values);
-        Debug.Log("BONDs count:" + bonds.data.Count);
     }
 
     void makeVisibleInEditor(Dictionary<KeyValuePair<Atom,Atom>, int> bondData)
@@ -63,6 +60,32 @@ public class Molecule : MonoBehaviour {
         }
     }
 
+    void updateBonds()
+    {
+        //reset all Atoms' electron state
+        foreach (Transform child in transform)
+        {
+            if (child.GetComponent<Atom>())
+            {
+                child.GetComponent<Atom>().ResetState();
+            }
+        }
+
+        //TODO !!! assume the most likely new molecule without the Atom who left H2O => HO ? 
+        //OR ! ==> disperse as a whole into single atoms again
+
+
+        //recalc electron trading and Bondtype
+        foreach (KeyValuePair<Atom, Atom> kvp in bonds.data.Keys) {
+            string bondType = bonds.BondType(kvp.Key, kvp.Value);
+            for (int i = 0; i < bonds.data[kvp]; i++)
+                //if there is multiple bonds
+            {
+                bonds.ElectronTrading(kvp.Key, kvp.Value, bondType);
+            }
+        }
+    }
+
     public void Init(List<int> atomnNumbers)
     {
         foreach (int num in atomnNumbers)
@@ -71,8 +94,7 @@ public class Molecule : MonoBehaviour {
             at.transform.parent = transform;
             at.transform.localPosition = Vector3.zero;
 
-            at.GetComponent<Atom>().Init(num);
-            
+            at.GetComponent<Atom>().Init(num);     
         }
         Debug.Log(size());
     }
@@ -90,17 +112,4 @@ public class Molecule : MonoBehaviour {
         return counter;
     }
 
-    public void updateTextMesh()
-    {
-
-    }
-
-    string Naming(List <Atom> components)  
-    {
-        return ".reduce";
-    }
-	// Update is called once per frame
-	void Update () {
-		
-	}
 }

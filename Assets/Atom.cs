@@ -172,7 +172,7 @@ public class Atom : MonoBehaviour
         to = removeDuplicates(to);
         from = removeDuplicates(from);
 
-        swagger.DrawBonds(transform, to);
+        //swagger.DrawBonds(transform, to);
       
 
     }

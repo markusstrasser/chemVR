@@ -21,6 +21,14 @@ public class SwagUtils : MonoBehaviour {
             }
         }
 
+        public void DrawAllBonds (Dictionary<KeyValuePair<Atom,Atom>, int> bondData)
+        {
+            foreach (KeyValuePair<Atom, Atom> kvp in bondData.Keys)
+            {
+                CreateLine(kvp.Key.transform, kvp.Value.transform);
+            }
+        }
+
 
         public string AtomText(int p, int e, int n)
         {

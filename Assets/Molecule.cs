@@ -38,6 +38,8 @@ public class Molecule : MonoBehaviour {
             Dictionary<string, int> composition = SwagUtils.elementComposition(transform);
             string molText = SwagUtils.MoleculeTextPlus(composition);
             transform.GetComponentInChildren<TextMeshManager>().DisplayText(molText);
+
+            swagger.DrawAllBonds(bonds.data);
         }
     }
 

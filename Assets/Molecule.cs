@@ -35,12 +35,35 @@ public class Molecule : MonoBehaviour {
             updateBonds();
             makeVisibleInEditor(bonds.data);
 
-            Dictionary<string, int> composition = SwagUtils.elementComposition(transform);
-            string molText = SwagUtils.MoleculeTextPlus(composition);
-            transform.GetComponentInChildren<TextMeshManager>().DisplayText(molText);
+            //mergeElements
+
+            GameObject.Find("MoleculeManager").GetComponent<MoleculeManager>().mergeElements(A.transform.parent, B.transform.parent);
+            changeText();
 
             swagger.DrawAllBonds(bonds.data);
         }
+    }
+
+    public void Init(List<int> atomnNumbers)
+    {
+        foreach (int num in atomnNumbers)
+        {
+            GameObject at = Instantiate<GameObject>(atom);
+            at.transform.parent = transform;
+            at.transform.localPosition = Vector3.zero;
+
+            at.GetComponent<Atom>().Init(num);
+        }
+        changeText();
+        Debug.Log(size());
+    }
+
+
+    void changeText()
+    {
+        Dictionary<string, int> composition = SwagUtils.elementComposition(transform);
+        string molText = SwagUtils.MoleculeTextPlus(composition);
+        transform.GetComponentInChildren<TextMeshManager>().DisplayText(molText);
     }
 
     void makeVisibleInEditor(Dictionary<KeyValuePair<Atom,Atom>, int> bondData)
@@ -86,19 +109,6 @@ public class Molecule : MonoBehaviour {
                 bonds.ElectronTrading(kvp.Key, kvp.Value, bondType);
             }
         }
-    }
-
-    public void Init(List<int> atomnNumbers)
-    {
-        foreach (int num in atomnNumbers)
-        {
-            GameObject at = Instantiate<GameObject>(atom);
-            at.transform.parent = transform;
-            at.transform.localPosition = Vector3.zero;
-
-            at.GetComponent<Atom>().Init(num);     
-        }
-        Debug.Log(size());
     }
     
     public int size () //in JS that's 1 line...

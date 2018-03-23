@@ -3,13 +3,20 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class MoleculeManager : MonoBehaviour {
-
+    public List<int> atomNumbers = new List<int>() { 1, 1, 1};
+    public Molecule molecule;
 	// Use this for initialization
 	void Start () {
-	    foreach (GameObject mol in GameObject.FindGameObjectsWithTag("Molecule"))
+        foreach (GameObject mol in GameObject.FindGameObjectsWithTag("Molecule"))
         {
             mol.GetComponent<Molecule>().Init(new List<int> { 1 });
-        }	
+        }
+        foreach (int entry in atomNumbers)
+        {
+            Molecule MOL = Instantiate(molecule, new Vector3(Random.Range(0f, 4f), Random.Range(0.3f, 1.5f), Random.Range(0f, 4f)), Quaternion.identity);
+            MOL.Init(new List<int>() { entry });
+            Debug.Log("mol " + entry);
+        }
 	}
 
     public void mergeElements(Transform A, Transform B)

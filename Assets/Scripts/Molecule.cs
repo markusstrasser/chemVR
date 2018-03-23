@@ -43,9 +43,12 @@ public class Molecule : MonoBehaviour {
         }
 
         //reduce
-
-
-        Vector3 center = pos.Aggregate(Vector3.zero, (acc, p) => acc + p) / pos.Count;
+        Vector3 center = pos.Aggregate(Vector3.zero, (acc, p) => acc + p);
+        Debug.Log("Center" + center + "fl " +  (float)pos.Count);
+        Debug.Log((new Vector3(0, 0, 0) == Vector3.zero) + "vectorzero");
+        //center = center / (float)pos.Count;
+        Debug.Log("Center _after " + center);
+ 
 
         //unchild
         foreach(Transform child in children)
@@ -92,15 +95,28 @@ public class Molecule : MonoBehaviour {
 
             at.GetComponent<Atom>().Init(num);
         }
+        StartCoroutine(WaitForAtomForSomeReason());
+    } 
+
+    void Later(){
         changeText();
-        Debug.Log(size());
     }
+IEnumerator WaitForAtomForSomeReason()
+{
+    yield return new WaitForSeconds(1f);
+    Later();
+}
 
 
-    void changeText()
+void changeText()
     {
         Dictionary<string, int> composition = SwagUtils.elementComposition(transform);
         string molText = SwagUtils.MoleculeTextPlus(composition);
+        if (molText== null)
+        {
+            molText = "X";
+        }
+
         transform.GetComponentInChildren<TextMeshManager>().DisplayText(molText);
     }
 

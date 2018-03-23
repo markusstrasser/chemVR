@@ -57,8 +57,8 @@ GameObject:
   - component: {fileID: 4961621109448064}
   - component: {fileID: 23899441784011736}
   - component: {fileID: 135525767207814006}
-  - component: {fileID: 114698115594673338}
   - component: {fileID: 54604983705447450}
+  - component: {fileID: 114698115594673338}
   - component: {fileID: 33721065263024608}
   m_Layer: 0
   m_Name: Pulse
@@ -74,7 +74,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1155213620393982}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.69, z: 0.841}
+  m_LocalPosition: {x: 0, y: 0.423, z: 0.733}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 224649466127028708}
@@ -89,7 +89,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1902094927953200}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: -0.423, z: -0.733}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0.3, y: 0.3, z: 0.3}
   m_Children: []
   m_Father: {fileID: 4339780763489098}
@@ -342,7 +342,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d77251acbd2e5be4e9d73c2c47174843, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rb: {fileID: 0}
 --- !u!135 &135525767207814006
 SphereCollider:
   m_ObjectHideFlags: 1

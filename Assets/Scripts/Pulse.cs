@@ -3,11 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Pulse : MonoBehaviour {
-    public Rigidbody rb;
+    Rigidbody rb;
     Vector3 direction;
 	// Use this for initialization
-	void Start () {
-        rb = GetComponent<Rigidbody>();
+	void Awake () {
+        rb = transform.GetComponent<Rigidbody>();
+        Debug.Log("rigidbod" + rb);
 	}
 
     private void OnTriggerStay(Collider other)

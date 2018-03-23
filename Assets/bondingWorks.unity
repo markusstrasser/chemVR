@@ -23,10 +23,10 @@ RenderSettings:
   m_AmbientSkyColor: {r: 0.212, g: 0.227, b: 0.259, a: 1}
   m_AmbientEquatorColor: {r: 0.114, g: 0.125, b: 0.133, a: 1}
   m_AmbientGroundColor: {r: 0.047, g: 0.043, b: 0.035, a: 1}
-  m_AmbientIntensity: 1
+  m_AmbientIntensity: 0.8
   m_AmbientMode: 0
   m_SubtractiveShadowColor: {r: 0.42, g: 0.478, b: 0.627, a: 1}
-  m_SkyboxMaterial: {fileID: 10304, guid: 0000000000000000f000000000000000, type: 0}
+  m_SkyboxMaterial: {fileID: 2100000, guid: b8f20d5ca50d16143afc11f5e4af6fc1, type: 2}
   m_HaloStrength: 0.5
   m_FlareStrength: 1
   m_FlareFadeSpeed: 3
@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657844, g: 0.49641222, b: 0.57481694, a: 1}
+  m_IndirectSpecularColor: {r: 0.30036062, g: 0.25133297, b: 0.20512995, a: 1}
 --- !u!157 &3
 LightmapSettings:
   m_ObjectHideFlags: 0
@@ -694,6 +694,11 @@ Prefab:
       propertyPath: modelAliasRightController
       value: 
       objectReference: {fileID: 442147452}
+    - target: {fileID: 20279136682254994, guid: b1581aacaba35664e80e3d0d9f2ea994,
+        type: 2}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: b1581aacaba35664e80e3d0d9f2ea994, type: 2}
   m_IsPrefabParent: 0
@@ -735,8 +740,8 @@ Camera:
   m_GameObject: {fileID: 702871949}
   m_Enabled: 1
   serializedVersion: 2
-  m_ClearFlags: 1
-  m_BackGroundColor: {r: 0.19215687, g: 0.3019608, b: 0.4745098, a: 0}
+  m_ClearFlags: 2
+  m_BackGroundColor: {r: 0.023788927, g: 0.037413493, b: 0.058823526, a: 0}
   m_NormalizedViewPortRect:
     serializedVersion: 2
     x: 0
@@ -990,6 +995,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b9e1492821364534f94a7f1cda052d02, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  atomNumbers: 010000000100000008000000
+  molecule: {fileID: 114476821222312698, guid: ed5ff1086458b1246a78d324b95920e8, type: 2}
 --- !u!4 &2017006439
 Transform:
   m_ObjectHideFlags: 0

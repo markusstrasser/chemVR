@@ -93,7 +93,10 @@ public class Atom : MonoBehaviour
     {
         KillEmptyMolecules();
         Transform other = closestToMe();
-        transform.GetComponentInParent<Molecule>().AddPair(this, other.GetComponent<Atom>());
+        if (other != null)
+        {
+            transform.GetComponentInParent<Molecule>().AddPair(this, other.GetComponent<Atom>());
+        }
     }
 
     void KillEmptyMolecules ()

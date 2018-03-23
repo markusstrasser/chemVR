@@ -7,7 +7,7 @@ public class TextMeshManager : MonoBehaviour
 {
     public Transform target;
 
-    public TextMeshPro textMeshPro;
+    TextMeshPro textMeshPro;
     // Use this for initialization
     void Start()
     {

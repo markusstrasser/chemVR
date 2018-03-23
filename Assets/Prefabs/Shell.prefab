@@ -9,47 +9,47 @@ Prefab:
     m_Modifications: []
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
-  m_RootGameObject: {fileID: 1608200902386036}
+  m_RootGameObject: {fileID: 1300303648784902}
   m_IsPrefabParent: 1
---- !u!1 &1608200902386036
+--- !u!1 &1300303648784902
 GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   serializedVersion: 5
   m_Component:
-  - component: {fileID: 4897369097826042}
-  - component: {fileID: 114963174159009672}
-  - component: {fileID: 54239915907440192}
-  - component: {fileID: 135186652142761670}
-  - component: {fileID: 33522110946747800}
-  - component: {fileID: 23388952501320568}
+  - component: {fileID: 4488777280755820}
+  - component: {fileID: 23792139584710936}
+  - component: {fileID: 135982764386452922}
+  - component: {fileID: 114161914078312830}
+  - component: {fileID: 54375037618653670}
+  - component: {fileID: 33497095710128174}
   m_Layer: 0
-  m_Name: Electron 1
-  m_TagString: Untagged
+  m_Name: Shell
+  m_TagString: Pulse
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &4897369097826042
+--- !u!4 &4488777280755820
 Transform:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1608200902386036}
+  m_GameObject: {fileID: 1300303648784902}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.2, y: 0.2, z: 0.2}
+  m_LocalPosition: {x: 0, y: -0.423, z: -0.733}
+  m_LocalScale: {x: 0.3, y: 0.3, z: 0.3}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!23 &23388952501320568
+--- !u!23 &23792139584710936
 MeshRenderer:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1608200902386036}
+  m_GameObject: {fileID: 1300303648784902}
   m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
@@ -58,7 +58,7 @@ MeshRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_Materials:
-  - {fileID: 2100000, guid: 28bb0e600244c8a4181bcf69514c5716, type: 2}
+  - {fileID: 2100000, guid: 9e8d9582b758c964e96cda9468152c06, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -78,19 +78,19 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!33 &33522110946747800
+--- !u!33 &33497095710128174
 MeshFilter:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1608200902386036}
+  m_GameObject: {fileID: 1300303648784902}
   m_Mesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
---- !u!54 &54239915907440192
+--- !u!54 &54375037618653670
 Rigidbody:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1608200902386036}
+  m_GameObject: {fileID: 1300303648784902}
   serializedVersion: 2
   m_Mass: 1
   m_Drag: 0
@@ -100,28 +100,27 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!114 &114963174159009672
+--- !u!114 &114161914078312830
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1608200902386036}
+  m_GameObject: {fileID: 1300303648784902}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0f286e51951ec6040938bf8c74d1cf0e, type: 3}
+  m_Script: {fileID: 11500000, guid: d77251acbd2e5be4e9d73c2c47174843, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  scale: 0.2
-  orbitRad: 2
---- !u!135 &135186652142761670
+  rb: {fileID: 0}
+--- !u!135 &135982764386452922
 SphereCollider:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1608200902386036}
+  m_GameObject: {fileID: 1300303648784902}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 0
+  m_IsTrigger: 1
+  m_Enabled: 1
   serializedVersion: 2
   m_Radius: 0.5
   m_Center: {x: 0, y: 0, z: 0}

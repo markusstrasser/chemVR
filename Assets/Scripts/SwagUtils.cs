@@ -12,15 +12,6 @@ public class SwagUtils : MonoBehaviour {
         public LineRenderer lRender;
         public int segments = 2;
 
-
-        public void DrawBonds(Transform a, List<Transform> bs)
-        {
-            foreach(Transform b in bs)
-            {      
-                CreateLine(a, b);
-            }
-        }
-
         public void DrawAllBonds (Dictionary<KeyValuePair<Atom,Atom>, int> bondData)
         {
             foreach (KeyValuePair<Atom, Atom> kvp in bondData.Keys)
@@ -28,8 +19,6 @@ public class SwagUtils : MonoBehaviour {
                 CreateLine(kvp.Key.transform, kvp.Value.transform);
             }
         }
-
-
         public string AtomText(int p, int e, int n)
         {
             ChemistryCalc chem = GameObject.Find("ChemistryCalc").GetComponent<ChemistryCalc>();

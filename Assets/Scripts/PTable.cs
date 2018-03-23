@@ -15,7 +15,6 @@ namespace AtomConfig
         public void RemoveBonds(Atom A)
         {
             A.ResetState();
-
             //maybe use .maping next time
             //parameterList.Remove(parameterList.Where(k => String.Compare(k.Key, "someKeyName") == 0)); 
             foreach (KeyValuePair<Atom, Atom> kvp in data.Keys)
@@ -99,27 +98,6 @@ namespace AtomConfig
 
             return !isEmpty && !isSame && canConnect;
         }
-    }
-
-    public class BondTester
-    {
-        //ionic bonds don't share Electrons. The higher EN Atom just takes it
-        //covalent bonds both ++ a valence Electron
-        public string type;
-        public Atom to;
-        public Atom self;
-        public Atom stronger;
-        public BondTester(Atom myself, Atom other)
-        {
-            //type = BondType(myself, other);
-            to = other;
-            self = myself;
-            //ElectronTrading(type);
-        }
-
-       
-
-      
     }
 
     public class Config {

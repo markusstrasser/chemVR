@@ -13,12 +13,17 @@ public class Pulse : MonoBehaviour {
 
     private void OnTriggerStay(Collider other)
     {
-        direction = (transform.position - other.transform.position).normalized;
-        rb.MovePosition(transform.position +  direction * 3f);
+        if (other.tag == "Pulse")
+        {
+            direction = (transform.position - other.transform.position).normalized;
+            rb.MovePosition(transform.position - direction / 200f);
+        }
+   
         
     }
     // Update is called once per frame
     void Update () {
+        transform.localPosition = Vector3.zero;
 		
 	}
 }

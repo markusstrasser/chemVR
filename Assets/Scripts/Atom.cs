@@ -21,6 +21,7 @@ public class Atom : MonoBehaviour
     public Molecule mol;
     public Molecule m;
     public bool grabbed = false;
+    Rigidbody rb;
 
     //make PTable a Struct
     //use delegates for successful bonding
@@ -28,6 +29,7 @@ public class Atom : MonoBehaviour
     // Use this for initialization
     void Start()
     {
+        rb = GetComponent<Rigidbody>();
         //get data from chemical table
         //Init(1);
         swagger = GameObject.Find("Swag").GetComponent<SwagUtils>();
@@ -52,7 +54,25 @@ public class Atom : MonoBehaviour
         config = AtomConfig.PTable.config[atomNumber];
     }
 
+    public void updateElectrons()
+    {
+        foreach(Transform child in transform)
+        {
+            if (child.tag == "Electron")
+            {
+                Destroy(child.gameObject);
+            }
+        }
+        int charge = config.capacity - config.valence - shared;
 
+        for (int i = 0; i < charge; i++)
+        {
+            Electron ele = Instantiate<Electron>(electron);
+            ele.transform.parent = transform;
+        }
+
+
+    }
     public void ResetState()
     {
         shared = 0;
@@ -162,12 +182,23 @@ public class Atom : MonoBehaviour
 
             //***for later molecule connects ==> mergeAnimation and molecule space collapsing function functions
         {
-            transform.parent.position = transform.position;
+            //transform.parent.position = transform.position;
         }
         if (Input.GetKeyDown("space"))
         {
             unGrab();
         }
+
+
+        //ctor3 direction = (transform.parent.position - transform.position).normalized;
+        /*
+        float d= Vector3.Distance(transform.position, transform.parent.position);
+        if (d > 0.5f && d < 100)
+        {
+            transform.position =Vector3.Lerp(transform.position, transform.parent.position, 20f* Time.deltaTime);
+            //.MovePosition(transform.parent.position * Time.deltaTime);
+        }
+       */
 
     }
 }

@@ -84,7 +84,16 @@ public class SwagUtils : MonoBehaviour {
             if (charge != 0)
             {
                 //TODO -1 => - ... 1 ==> + ...for single charges only
-                text += "<sup>" + charge + "</sup>";
+                string sign = charge > 0 ? "+" : "-";
+                if (charge != 1 || charge != -1)
+                {
+                    text += "<sup>" + charge + sign + "</sup>";
+                }
+                else
+                {
+                    //only  HO+ not HO1+
+                    text += "<sup>" + sign + "</sup>";
+                }
             }
        
             return text;

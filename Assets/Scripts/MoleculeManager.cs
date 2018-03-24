@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class MoleculeManager : MonoBehaviour {
-    public List<int> atomNumbers = new List<int>() { 1, 1, 1};
+    private List<int> atomNumbers = new List<int>() { 1, 1, 8, 5, 6, 7, 1, 8};
     public Molecule molecule;
 	// Use this for initialization
 	void Start () {
@@ -13,7 +13,9 @@ public class MoleculeManager : MonoBehaviour {
         }
         foreach (int entry in atomNumbers)
         {
-            Molecule MOL = Instantiate(molecule, new Vector3(Random.Range(0f, 4f), Random.Range(0.3f, 1.5f), Random.Range(0f, 4f)), Quaternion.identity);
+            Molecule MOL = Instantiate(molecule, Vector3.one, Quaternion.identity);
+
+            MOL.transform.position = new Vector3(Random.Range(0f, 4f), Random.Range(0.3f, 1.5f), Random.Range(0f, 4f));
             MOL.Init(new List<int>() { entry });
             Debug.Log("mol " + entry);
         }

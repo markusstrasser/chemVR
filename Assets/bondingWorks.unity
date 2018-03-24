@@ -995,7 +995,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b9e1492821364534f94a7f1cda052d02, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  atomNumbers: 010000000100000008000000
   molecule: {fileID: 114476821222312698, guid: ed5ff1086458b1246a78d324b95920e8, type: 2}
 --- !u!4 &2017006439
 Transform:

@@ -12,6 +12,7 @@ using System.Linq;
 
 public class Molecule : MonoBehaviour {
     public GameObject atom;
+    public int charge = 0;
     SwagUtils swagger;
     public Bonds bonds;
     public List<Atom> Atom_1 = new List<Atom>();
@@ -34,7 +35,7 @@ public class Molecule : MonoBehaviour {
         foreach (Transform child in transform)
         {
 
-            if (transform.GetComponent<Atom>())
+            if (child.GetComponent<Atom>() != null)
             {
                 pos.Add(child.position);
             }
@@ -45,13 +46,12 @@ public class Molecule : MonoBehaviour {
         //reduce
         Vector3 center = pos.Aggregate(Vector3.zero, (acc, p) => acc + p);
         Debug.Log("Center" + center + "fl " +  (float)pos.Count);
-        Debug.Log((new Vector3(0, 0, 0) == Vector3.zero) + "vectorzero");
-        //center = center / (float)pos.Count;
+        center = center / (float)pos.Count;
         Debug.Log("Center _after " + center);
- 
+
 
         //unchild
-        foreach(Transform child in children)
+        foreach (Transform child in children)
         {
             child.parent = null;
         }
@@ -61,7 +61,10 @@ public class Molecule : MonoBehaviour {
             child.parent = transform;
         }
 
-        transform.FindChild("Pulse").localScale *= 2;
+        Transform pulse = transform.FindChild("Pulse").transform;
+        pulse.localPosition = Vector3.zero;
+        pulse.localScale = Vector3.one * pos.Count / 1.5f;
+
 
 
     }
@@ -71,18 +74,35 @@ public class Molecule : MonoBehaviour {
         if (bonds.isValidBond(A, B))
         { 
             Debug.Log("VALID BONDING!! " + A + "asdsaa" + B);
+
             bonds.AddBond(bond);
             updateBonds();
             makeVisibleInEditor(bonds.data);
-            changeVisuals();
-
             //mergeElements
 
             GameObject.Find("MoleculeManager").GetComponent<MoleculeManager>().mergeElements(A.transform.parent, B.transform.parent);
+
+
             changeText();
+            changeVisuals();
 
             swagger.DrawAllBonds(bonds.data);
         }
+    }
+    int calcCharge()
+    {
+        int ch = 0;
+        foreach (Transform child in transform)
+        {
+            Atom a = child.GetComponent<Atom>();
+            if (a!= null)
+            {
+                //this makes 
+                ch += (a.config.capacity - a.config.valence - a.shared);
+            }
+        }
+        return ch;
+
     }
 
     public void Init(List<int> atomnNumbers)
@@ -90,10 +110,12 @@ public class Molecule : MonoBehaviour {
         foreach (int num in atomnNumbers)
         {
             GameObject at = Instantiate<GameObject>(atom);
+            at.GetComponent<Atom>().Init(num);
+
             at.transform.parent = transform;
             at.transform.localPosition = Vector3.zero;
 
-            at.GetComponent<Atom>().Init(num);
+
         }
         StartCoroutine(WaitForAtomForSomeReason());
     } 
@@ -107,11 +129,31 @@ IEnumerator WaitForAtomForSomeReason()
     Later();
 }
 
+int countAtomChildren()
+    {
+        int c = 0;
+        foreach (Transform child in transform)
+        {
+            Atom a = child.GetComponent<Atom>();
+            if (a != null)
+            {
+                c++;
+            }
+        }
+        return c;
+    }
 
 void changeText()
     {
+        int ch = calcCharge();
+        if (countAtomChildren() == 1)
+        {
+            //don't display on single atoms
+            ch= 0;
+        }
+
         Dictionary<string, int> composition = SwagUtils.elementComposition(transform);
-        string molText = SwagUtils.MoleculeTextPlus(composition);
+        string molText = SwagUtils.MoleculeTextPlus(composition, ch);
         if (molText== null)
         {
             molText = "X";
@@ -142,13 +184,7 @@ void changeText()
     void updateBonds()
     {
         //reset all Atoms' electron state
-        foreach (Transform child in transform)
-        {
-            if (child.GetComponent<Atom>())
-            {
-                child.GetComponent<Atom>().ResetState();
-            }
-        }
+       
 
         //TODO !!! assume the most likely new molecule without the Atom who left H2O => HO ? 
         //OR ! ==> disperse as a whole into single atoms again
@@ -161,6 +197,13 @@ void changeText()
                 //if there is multiple bonds
             {
                 bonds.ElectronTrading(kvp.Key, kvp.Value, bondType);
+            }
+        }
+        foreach (Transform child in transform)
+        {
+            if (child.GetComponent<Atom>())
+            {
+                child.GetComponent<Atom>().updateElectrons();
             }
         }
     }

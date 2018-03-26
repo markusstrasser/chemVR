@@ -103,6 +103,8 @@ namespace AtomConfig
     public class Config {
         public string symbol;
         public string name;
+        public Color color;
+        public float size;
         public int protons;
         public int valence;
         public int capacity;
@@ -121,6 +123,8 @@ namespace AtomConfig
             },
              new Config(){
                  name = "Hydrogen",
+                 color = Color.white,
+                 size = 1f,
                  symbol = "H",
                  protons = 1,
                  valence = 1,
@@ -130,6 +134,8 @@ namespace AtomConfig
              },
              new Config(){
                  name = "Helium",
+                 color = Color.blue,
+                 size = 1.2f,
                  symbol = "H",
                  protons = 2,
                  valence = 2,
@@ -139,6 +145,8 @@ namespace AtomConfig
              },
              new Config(){
                  name = "Lithium",
+                 color = Color.red,
+                 size = 1.4f,
                  symbol = "Li",
                  protons = 3,
                  valence = 1,
@@ -149,6 +157,8 @@ namespace AtomConfig
              new Config(){
                  name = "Berylium",
                  symbol = "Be",
+                 color = Color.red,
+                 size = 1.45f,
                  protons = 4,
                  valence = 2,
                  capacity = 8,
@@ -157,6 +167,8 @@ namespace AtomConfig
              },
              new Config(){
                  name = "Boron",
+                 color = Color.blue,
+                 size = 1.2f,
                  symbol = "B",
                  protons = 5,
                  valence = 3,
@@ -166,6 +178,8 @@ namespace AtomConfig
              },
              new Config(){
                  name = "Carbon",
+                 color = Color.grey,
+                 size = 1.6f,
                  symbol = "C",
                  protons = 6,
                  valence = 4,
@@ -175,6 +189,8 @@ namespace AtomConfig
              },
              new Config(){
                  name = "Nitrogen",
+                 color = Color.green,
+                 size = 1.7f,
                  symbol = "N",
                  protons = 7,
                  valence = 5,
@@ -185,6 +201,8 @@ namespace AtomConfig
              new Config(){
                  name = "Oxygen",
                  symbol = "O",
+                 color = Color.blue,
+                 size = 1.9f,
                  protons = 8,
                  valence = 6,
                  capacity = 8,

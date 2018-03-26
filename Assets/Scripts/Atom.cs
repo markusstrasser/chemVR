@@ -22,6 +22,7 @@ public class Atom : MonoBehaviour
     public Molecule m;
     public bool grabbed = false;
     Rigidbody rb;
+    public 
 
     //make PTable a Struct
     //use delegates for successful bonding
@@ -33,7 +34,8 @@ public class Atom : MonoBehaviour
         //get data from chemical table
         //Init(1);
         swagger = GameObject.Find("Swag").GetComponent<SwagUtils>();
-
+        GetComponent<MeshRenderer>().material = new Material(Shader.Find("Specular"));
+        GetComponent<MeshRenderer>().material.color = config.color;
         for (int i = 0; i < config.valence; i++)
         {
             Electron ele = Instantiate<Electron>(electron);

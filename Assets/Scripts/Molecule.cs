@@ -18,7 +18,7 @@ public class Molecule : MonoBehaviour {
     public List<Atom> Atom_1 = new List<Atom>();
     public List<Atom> Atom_2 = new List<Atom>();
     public List<int> strengthsEdit = new List<int> { 0 };
-
+    public float counter = 0;
 	// Use this for initialization
 	void Start () {
         bonds = new AtomConfig.Bonds();
@@ -26,6 +26,15 @@ public class Molecule : MonoBehaviour {
         //--> done by Molecule Manager
         swagger = GameObject.Find("Swag").GetComponent<SwagUtils>();
     }
+
+    private void Update()
+    {
+        counter += 0.05f;
+        float change = Mathf.Sin(counter) * Time.deltaTime * (1 - 0.15f * transform.childCount);
+            transform.position += new Vector3(0, change, 0);
+    }
+
+
 
     void changeVisuals ()
     {

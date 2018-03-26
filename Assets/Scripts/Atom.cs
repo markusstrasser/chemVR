@@ -22,8 +22,6 @@ public class Atom : MonoBehaviour
     public Molecule m;
     public bool grabbed = false;
     Rigidbody rb;
-    public 
-
     //make PTable a Struct
     //use delegates for successful bonding
 
@@ -36,6 +34,12 @@ public class Atom : MonoBehaviour
         swagger = GameObject.Find("Swag").GetComponent<SwagUtils>();
         GetComponent<MeshRenderer>().material = new Material(Shader.Find("Specular"));
         GetComponent<MeshRenderer>().material.color = config.color;
+
+        float s = config.size;
+        s = s * 10;
+
+        transform.localScale = new Vector3(s,s,s);
+
         for (int i = 0; i < config.valence; i++)
         {
             Electron ele = Instantiate<Electron>(electron);
@@ -186,6 +190,9 @@ public class Atom : MonoBehaviour
         {
             //transform.parent.position = transform.position;
         }
+
+     
+
         if (Input.GetKeyDown("space"))
         {
             unGrab();

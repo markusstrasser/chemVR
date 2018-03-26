@@ -13,13 +13,27 @@ public class MoleculeManager : MonoBehaviour {
         }
         foreach (int entry in atomNumbers)
         {
-            Molecule MOL = Instantiate(molecule, Vector3.one, Quaternion.identity);
+            Vector3 center = new Vector3(0, 1, 0);
+            Vector3 pos = RandomCircle(center, 5.0f);
+            Quaternion rot = Quaternion.FromToRotation(Vector3.forward, center - pos);
 
-            MOL.transform.position = new Vector3(Random.Range(0f, 4f), Random.Range(0.3f, 1.5f), Random.Range(0f, 4f));
+            Molecule MOL = Instantiate(molecule, pos, rot);
+
+            //MOL.transform.position = new Vector3(Random.Range(0f, 4f), Random.Range(0.3f, 1.5f), Random.Range(0f, 4f));
             MOL.Init(new List<int>() { entry });
             Debug.Log("mol " + entry);
         }
 	}
+
+    Vector3 RandomCircle(Vector3 center, float radius)
+    {
+        float ang = Random.value * 360;
+        Vector3 pos;
+        pos.x = center.x + radius * Mathf.Sin(ang * Mathf.Deg2Rad);
+        pos.z = center.z + radius * Mathf.Cos(ang * Mathf.Deg2Rad);
+        pos.y = center.y;
+        return pos;
+    }
 
     public void mergeElements(Transform A, Transform B)
     {

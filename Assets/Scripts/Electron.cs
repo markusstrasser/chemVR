@@ -5,14 +5,15 @@ using UnityEngine;
 public class Electron : MonoBehaviour {
 
     float speed = 100f;
-    public float scale = 0.2f;
+    //public float scale = 0.2f;
     [Range(0,2)]
     public float orbitRad = 1f;
 	// Use this for initialization
 	void Start () {
         //gameObject.tag = "Electron";
         float partial = (1 + transform.GetSiblingIndex())/transform.parent.childCount;
-        transform.localScale = new Vector3(scale, scale, scale);
+        //transform.localScale = new Vector3(scale, scale, scale);
+        transform.localPosition = new Vector3(0,0,0); 
         Arrange(transform.parent.GetComponent<Atom>().config.valenceOrbit, orbitRad, partial);
        
     }

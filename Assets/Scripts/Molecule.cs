@@ -70,7 +70,7 @@ public class Molecule : MonoBehaviour {
             child.parent = transform;
         }
 
-        Transform pulse = transform.FindChild("Pulse").transform;
+        Transform pulse = transform.Find("Pulse").transform;
         pulse.localPosition = Vector3.zero;
         pulse.localScale = Vector3.one * pos.Count / 1.5f;
 

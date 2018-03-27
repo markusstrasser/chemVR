@@ -121,7 +121,7 @@ public class Atom : MonoBehaviour
         Transform other = closestToMe();
         if (other != null)
         {
-            transform.GetComponentInParent<Molecule>().AddPair(this, other.GetComponent<Atom>());
+            transform.parent.GetComponent<Molecule>().AddPair(this, other.GetComponent<Atom>());
         }
     }
 

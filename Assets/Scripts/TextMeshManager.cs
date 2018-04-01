@@ -17,14 +17,23 @@ public class TextMeshManager : MonoBehaviour
 
     public void DisplayText(string text)
     {
+        target = GameObject.FindGameObjectWithTag("POW").transform;
+    
         textMeshPro.text = text;
+        transform.localPosition = new Vector3(0, 0, 0);
     }
     private void Update()
     {
+
+
         if (target != null)
         {
+
+            // transform.localPosition = new Vector3(0f, 0f, 0f);
             transform.LookAt(target);
             transform.Rotate(0, 180, 0);
+
+
         }
     }
 }

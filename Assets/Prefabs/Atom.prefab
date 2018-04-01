@@ -148,7 +148,7 @@ MonoBehaviour:
   electron: {fileID: 114963174159009672, guid: 79d807f06f8dc354e829ed4e58cfa95f, type: 2}
   swagger: {fileID: 114883610253686830, guid: e4cc8c7f87a30ed4f880756bfe28063e, type: 2}
   maxDistance: 2
-  mol: {fileID: 0}
+  mol: {fileID: 114476821222312698, guid: ed5ff1086458b1246a78d324b95920e8, type: 2}
   m: {fileID: 0}
   grabbed: 0
 --- !u!135 &135266440561286440

@@ -13,7 +13,7 @@ public class MoleculeManager : MonoBehaviour {
         }
         foreach (int entry in atomNumbers)
         {
-            Vector3 center = new Vector3(0, 1, 0);
+            Vector3 center = new Vector3(0, 1.5f, 0);
             Vector3 pos = RandomCircle(center, 5.0f);
             Quaternion rot = Quaternion.FromToRotation(Vector3.forward, center - pos);
 
@@ -53,6 +53,18 @@ public class MoleculeManager : MonoBehaviour {
                 //transform.parent.GetChild(0).parent = B.parent;
             }
         }
+
+        foreach (GameObject mol in GameObject.FindGameObjectsWithTag("Molecule"))
+        {
+            if (mol.GetComponentInChildren<Atom>() == null)
+            {
+                Destroy(mol);
+            }
+        }
+        A.GetComponent<Molecule>().changeText();
+        A.GetComponent<Molecule>().changeVisuals();
+
+
     }
 
     // Update is called once per frame

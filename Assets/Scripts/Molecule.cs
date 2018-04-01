@@ -36,7 +36,7 @@ public class Molecule : MonoBehaviour {
 
 
 
-    void changeVisuals ()
+    public void changeVisuals ()
     {
         List<Vector3> pos = new List<Vector3>();
         List<Transform> children = new List<Transform>();
@@ -70,7 +70,7 @@ public class Molecule : MonoBehaviour {
             child.parent = transform;
         }
 
-        Transform pulse = transform.FindChild("Pulse").transform;
+        Transform pulse = transform.Find("Pulse").transform;
         pulse.localPosition = Vector3.zero;
         pulse.localScale = Vector3.one * pos.Count / 1.5f;
 
@@ -89,11 +89,13 @@ public class Molecule : MonoBehaviour {
             makeVisibleInEditor(bonds.data);
             //mergeElements
 
-            GameObject.Find("MoleculeManager").GetComponent<MoleculeManager>().mergeElements(A.transform.parent, B.transform.parent);
+
+            MoleculeManager molM = GameObject.Find("MoleculeManager").GetComponent<MoleculeManager>();
+            Debug.Log(A.transform.parent.name + "  bonding with " + B.transform.parent.name);
+            molM.mergeElements(A.transform.parent, B.transform.parent);
 
 
-            changeText();
-            changeVisuals();
+           
 
             swagger.DrawAllBonds(bonds.data);
         }
@@ -123,8 +125,6 @@ public class Molecule : MonoBehaviour {
 
             at.transform.parent = transform;
             at.transform.localPosition = Vector3.zero;
-
-
         }
         StartCoroutine(WaitForAtomForSomeReason());
     } 
@@ -132,7 +132,7 @@ public class Molecule : MonoBehaviour {
     void Later(){
         changeText();
     }
-IEnumerator WaitForAtomForSomeReason()
+    IEnumerator WaitForAtomForSomeReason()
 {
     yield return new WaitForSeconds(1f);
     Later();
@@ -152,7 +152,7 @@ int countAtomChildren()
         return c;
     }
 
-void changeText()
+public void changeText()
     {
         int ch = calcCharge();
         if (countAtomChildren() == 1)
@@ -169,6 +169,8 @@ void changeText()
         }
 
         transform.GetComponentInChildren<TextMeshManager>().DisplayText(molText);
+        transform.GetComponentInChildren<TextMeshManager>().transform.localPosition = new Vector3(0,0,0);
+
     }
 
     void makeVisibleInEditor(Dictionary<KeyValuePair<Atom,Atom>, int> bondData)
@@ -188,6 +190,13 @@ void changeText()
         {
             strengthsEdit.Add(strength);
         }
+    }
+
+    void ResetMe()
+    {
+        //reset molecules atom electron state
+        //rebind based on close neighbors
+        //so that valence states after someone is grabbed are legit
     }
 
     void updateBonds()

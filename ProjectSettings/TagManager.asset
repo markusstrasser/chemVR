@@ -11,6 +11,7 @@ TagManager:
   - bond
   - Molecule
   - Pulse
+  - POW
   layers:
   - Default
   - TransparentFX
